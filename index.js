@@ -10,12 +10,12 @@ function createEmployeeRecord(arr) {
     };
   }
   
-  // Function to create employee records from an array of arrays
+  
   function createEmployeeRecords(arr) {
     return arr.map(createEmployeeRecord);
   }
   
-  // Function to create a time-in event
+ 
   function createTimeInEvent(dateTime) {
     this.timeInEvents.push({
       type: "TimeIn",
@@ -25,7 +25,7 @@ function createEmployeeRecord(arr) {
     return this;
   }
   
-  // Function to create a time-out event
+ 
   function createTimeOutEvent(dateTime) {
     this.timeOutEvents.push({
       type: "TimeOut",
@@ -35,14 +35,14 @@ function createEmployeeRecord(arr) {
     return this;
   }
   
-  // Function to calculate hours worked on a specific date
+  
   function hoursWorkedOnDate(date) {
     let timeIn = this.timeInEvents.find(event => event.date === date).hour;
     let timeOut = this.timeOutEvents.find(event => event.date === date).hour;
     return (timeOut - timeIn) / 100;
   }
   
-  // Function to calculate wages earned on a specific date
+  
   function wagesEarnedOnDate(date) {
     return hoursWorkedOnDate.call(this, date) * this.payPerHour;
   }
@@ -50,7 +50,7 @@ function createEmployeeRecord(arr) {
     return srcArray.find(record => record.firstName === firstName);
   }
   
-  // Function to calculate payroll for all employees
+
   function calculatePayroll(employeeRecords) {
     return employeeRecords.reduce((total, record) => total + allWagesFor.call(record), 0);
   }  
@@ -62,8 +62,7 @@ const allWagesFor = function () {
 
     const payable = eligibleDates.reduce(function (memo, d) {
         return memo + wagesEarnedOnDate.call(this, d)
-    }.bind(this), 0) // <== Hm, why did we need to add bind() there? We'll discuss soon!
-
+    }.bind(this), 0) 
     return payable
 }
 
